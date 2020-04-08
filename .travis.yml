@@ -14,5 +14,5 @@ install:
 - "[ $CXX = g++ ] && export CXX=g++-6 || true"
 - "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
 script:
-   - (make test > log.txt) && (echo $(cat log.txt | tail -n 2 | cut -c 1-16 | awk '{ print $0==$PASSED }'))  
+   - (make test > log.txt) && (echo $(cat log.txt | tail -n 2 | cut -c 1-16 | awk '{ $0 -eq $PASSED }'))  
    - make 
