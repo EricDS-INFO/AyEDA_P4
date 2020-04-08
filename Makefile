@@ -9,7 +9,7 @@ TEST_PATH = tests
 
 # executable # 
 BIN_NAME = runner
-TEST_NAME = p1_test_runner
+TEST_NAME = test_runner
 
 # extensions #
 SRC_EXT = cpp
