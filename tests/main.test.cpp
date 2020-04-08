@@ -12,6 +12,6 @@ TEST_CASE("add function does work")
     {
         a=1;
         b=3;
-        REQUIRE(add(a,b) == 4);
+        REQUIRE(add(a,b) != 4);
     }
 }
