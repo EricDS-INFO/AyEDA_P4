@@ -16,28 +16,30 @@
 
 ## Contenido:
 **En el include:**
-- [Definición de la plantilla de clase tabla]()
-- [Definición de la plantilla de clase Celda]()
-- [Definición de la clase de clave DNI]()
-- [Clase abstracta de función de dispersión]()
-- [Clase abstracta de función de exploración]()
+- [Definición de la plantilla de clase tabla](./include/table.hpp)
+- [Definición de la plantilla de clase Celda](./include/slot.hpp)
+  > Las plantillas de clase, dado que no supone ninguna mejora, no se separan
+  > por "hpp" y "cpp". El desarrollo se incluye en el mismo fichero.
+- [Definición de la clase de clave DNI](./include/dni.hpp)
+- [Clase abstracta de función de dispersión](./include/hash_func.hpp)
+- [Clase abstracta de función de exploración](./include/exp_func.hpp)
 
 > Además de cada una de las implementaciones (sobrecargas) de las 
 > funciones de dispersión y de exploración (en el mismo subdirectorio).
  
 
 **En el src:**
-- [Implementación de la clase de clave DNI]()
-- [Implementación del programa principal]()
+- [Implementación de la clase de clave DNI](./src/dni.cpp)
+- [Implementación del programa principal](./src/hash_stats.cpp)
 
 **En el tests:**
-- [Fichero de unión de los test]()
-- [Test de la plantilla de clase tabla]()
-- [Test de la plantilla de clase Celda]()
-- [Test de la clase de clave DNI]()
-- [Tests de la función de dispersión y sus sobrecargas]()
-- [Tests de la función de exploración y sus sobrecargas]()
-- [Test de las funciones del programa principal]()
+- [Fichero de unión de los test](./tests/includer.test.cpp)
+- [Test de la plantilla de clase tabla](./tests/board.test.cpp)
+- [Test de la plantilla de clase Celda](./tests/slot.test.cpp)
+- [Test de la clase de clave DNI](./tests/dni.test.cpp)
+- [Tests de la función de dispersión y sus sobrecargas](./tests/h_func.test.cpp)
+- [Tests de la función de exploración y sus sobrecargas](./tests/e_func.test.cpp)
+- [Test de las funciones del programa principal](./tests/hash.test.cpp)
 
 ## Dependencias
 
