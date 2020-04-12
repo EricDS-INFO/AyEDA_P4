@@ -1,5 +1,3 @@
-#include<cstdlib>
-
 #include "../include/dni.hpp"
 
 #define BOUND 100000000
