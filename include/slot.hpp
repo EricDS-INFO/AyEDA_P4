@@ -1,7 +1,7 @@
 #pragma once
 #include "hash_func.hpp"
 #include "exp_func.hpp"
-
+#include <bits/stdc++.h>
 
 template <class KEY>
 class slot
@@ -19,20 +19,24 @@ class slot
         bool full(void);
         
         
-        void insert(KEY& key_t);
-
+        bool insert(KEY& key_t);
+        bool sec_search(KEY key_t);
+        bool bin_search(KEY key_t);
 };
 
 template<class KEY>
 slot<KEY>::slot(int size)
 {
     keys_.resize(size);
+    for (int i  = 0; i < keys_.size(); i++)
+    {
+        keys_[i].set_none();
+    } 
 }
 
 template<class KEY>
 slot<KEY>::~slot()
-{
-
+{   
     while(!keys_.empty())
     {
         keys_.pop_back();    
@@ -48,8 +52,9 @@ int slot<KEY>::elements(void)
     int n_elms = 0;
     for (int i = 0; i < size(); i++)
     {
-        if (keys_[i] != NULL)
+        if(keys_[i].value() != -1)
             n_elms ++;
+
     }
 
     return n_elms;
@@ -58,5 +63,60 @@ int slot<KEY>::elements(void)
 template<class KEY>
 bool slot<KEY>::full(void)
 {
-    return keys_.empty();
+    return elements() == size();
+}
+
+template<class KEY>
+bool slot<KEY>::insert(KEY& key_t)
+{
+    for (int i = 0; i < size(); i++)
+    {
+        if (keys_[i].value() == -1)
+        {
+            keys_[i] = key_t;
+            return true;
+        }
+    }
+    return false;
+}
+
+
+template<class KEY>
+bool slot<KEY>::sec_search(KEY key_t)
+{
+    for (int i = 0; i < size(); i++)
+    {
+        if (keys_[i] == key_t)
+            return true;
+    }
+    return false;
+}
+
+template<class KEY>
+bool slot<KEY>::bin_search(KEY key_t)
+{
+    std::sort(keys_.begin(), keys_.end());
+
+    int start = 0;
+    int end = size();
+    int position = start;
+
+    while (start < end)
+    {
+        position = (start + end) / 2;
+        if (keys_[ position ] == key_t)
+        {
+            return true;
+        }
+        else
+        {
+            if (keys_[ position ] < key_t)
+                start = position + 1;
+            else
+                end = position - 1;
+        }
+    }
+    if ( keys_[start] == key_t )
+        return true;
+    return false;
 }

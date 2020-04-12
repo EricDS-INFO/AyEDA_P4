@@ -57,4 +57,30 @@ std::ostream& operator<< (std::ostream& os, dni dni_t)
             os << "- XXXXXXXX -\n";
             break;
     }
+    return os;
+}
+
+bool dni::operator== (dni r_value)
+{
+    return value() == r_value.value();
+}
+bool dni::operator!= (dni r_value)
+{
+    return value() != r_value.value();
+}
+bool dni::operator> (dni r_value)
+{
+    return value() > r_value.value();
+}
+bool dni::operator< (dni r_value)
+{
+    return value() < r_value.value();
+}
+bool dni::operator>= (dni r_value)
+{
+    return value() >= r_value.value();
+}
+bool dni::operator<= (dni r_value)
+{
+    return value() <= r_value.value();
 }
