@@ -15,8 +15,12 @@ class slot
         slot(int size);
         ~slot();
         int inline size(void) { return keys_.size(); }
+        int elements(void);
         bool full(void);
+        
+        
         void insert(KEY& key_t);
+
 };
 
 template<class KEY>
@@ -37,6 +41,19 @@ slot<KEY>::~slot()
     keys_.resize(0);
 }
 
+
+template<class KEY>
+int slot<KEY>::elements(void)
+{
+    int n_elms = 0;
+    for (int i = 0; i < size(); i++)
+    {
+        if (keys_[i] != NULL)
+            n_elms ++;
+    }
+
+    return n_elms;
+}
 
 template<class KEY>
 bool slot<KEY>::full(void)

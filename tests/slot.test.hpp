@@ -20,6 +20,17 @@ SCENARIO( "Slot object can be created as DNI keys", "[structure]" )
                 REQUIRE(first_slot.full() == false);
             }
         }
+        AND_WHEN( "One element is inserted" )
+        {
+            dni dni_1;
+            first_slot.insert(dni_1);
+
+            THEN ( "number of elements increase but still not full" )
+            {
+                REQUIRE(first_slot.elements() == 1);
+                REQUIRE(first_slot.full() == false);
+            }
+        }
     }
 }
 
