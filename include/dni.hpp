@@ -15,4 +15,6 @@ public:
     inline int length() { return length_; }
 
     friend std::ostream& operator<< (std::ostream& os, dni dni_t);
+    //dni operator== (dni r_value);
+    //operator unsigned long();
 };
