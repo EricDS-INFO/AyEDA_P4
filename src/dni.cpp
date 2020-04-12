@@ -1,18 +1,21 @@
 #include<cstdlib>
-#define RAND_MAX 99999999
 
+#define BOUND 100000000
 
 dni::dni()
 {
-    value_ = rand();
+    value_ = rand() % BOUND;
     length_ = std::to_string(value_).length();
 }
 
+
 dni::dni(int seed)
 {   srand(seed);
-    value_ = rand();
+    value_ = rand() % BOUND;
     length_ = std::to_string(value_).length();
 }
+
+dni::~dni(){}
 
 std::ostream& operator<< (std::ostream& os, dni dni_t)
 {
