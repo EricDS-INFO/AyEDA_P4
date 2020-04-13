@@ -40,17 +40,16 @@ SCENARIO( "DNI is created as a random number of 8 digits" )
         }
         WHEN("Compared a few times the objects, counter value changes")
         {
+            dni dni_3;
+            dni dni_4;
             THEN( "Counter value is increased" )
             {
-            if ( dni_1 == dni_2 )
-            if ( dni_1 != dni_2 )
-            if ( dni_1 > dni_2 )
-            if ( dni_1 < dni_2 )
-            if ( dni_1 >= dni_2 )
-            if ( dni_1 <= dni_2 )
+            dni::reset_c();
+            if ( dni_3 <= dni_4 );
+            if ( dni_3 == dni_4 );
          
-                REQUIRE(dni_1.nth_compare() == 6);
-                REQUIRE(dni_2.nth_compare() == 3);
+            REQUIRE(dni::nth_compare() == 2);
+            REQUIRE(dni::nth_compare() == 2);
             }
         }
     }
