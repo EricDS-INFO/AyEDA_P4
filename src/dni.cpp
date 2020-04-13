@@ -1,4 +1,6 @@
 #include "../include/dni.hpp"
+#include "../include/counter.hpp"
+
 
 #define BOUND 100000000
 
@@ -17,7 +19,10 @@ dni::dni(int seed)
 
 dni::~dni(){}
 
-std::ostream& operator<< (std::ostream& os, dni dni_t)
+
+inline int dni::nth_compare() { return stat_c_.value(); }
+
+std::ostream& operator<< (std::ostream& os, dni& dni_t)
 {
     switch( dni_t.length() )
     {
@@ -60,27 +65,33 @@ std::ostream& operator<< (std::ostream& os, dni dni_t)
     return os;
 }
 
-bool dni::operator== (dni r_value)
+bool dni::operator== (dni& r_value)
 {
-    return value() == r_value.value();
+    stat_c_.increase();
+    return this->value() == r_value.value();
 }
-bool dni::operator!= (dni r_value)
+bool dni::operator!= (dni& r_value)
 {
-    return value() != r_value.value();
+    stat_c_.increase();
+    return this->value() != r_value.value();
 }
-bool dni::operator> (dni r_value)
+bool dni::operator> (dni& r_value)
 {
-    return value() > r_value.value();
+    stat_c_.increase();
+    return this->value() > r_value.value();
 }
-bool dni::operator< (dni r_value)
+bool dni::operator< (dni& r_value)
 {
-    return value() < r_value.value();
+    stat_c_.increase();
+    return this->value() < r_value.value();
 }
-bool dni::operator>= (dni r_value)
+bool dni::operator>= (dni& r_value)
 {
-    return value() >= r_value.value();
+    stat_c_.increase();
+    return this->value() >= r_value.value();
 }
-bool dni::operator<= (dni r_value)
+bool dni::operator<= (dni& r_value)
 {
-    return value() <= r_value.value();
+    stat_c_.increase();
+    return this->value() <= r_value.value();
 }
