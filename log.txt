@@ -1,6 +1,0 @@
-Making tests: test_runner
-g++ -o test_runner tests/main.test.cpp 
-./test_runner 
-===============================================================================
-All tests passed (2 assertions in 1 test case)
-
