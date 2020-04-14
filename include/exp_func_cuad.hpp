@@ -1,4 +1,3 @@
-
 #pragma once
 #include "exp_func.hpp"
 
@@ -11,6 +10,7 @@ class exp_func_cuad: public exp_func<KEY>
 
          exp_func_cuad(int slot_num = 0): 
             slot_num_(slot_num){}
+
         ~exp_func_cuad(){};
 
         int operator() (const KEY& key_t, int val);

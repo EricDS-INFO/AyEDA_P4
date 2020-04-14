@@ -1,7 +1,9 @@
 #include "../include/catch/catch.h"
 #include "../include/dni.hpp"
+#include "../include/hash_func.hpp"
 #include "../include/exp_func_lin.hpp"
 #include "../include/exp_func_cuad.hpp"
+#include "../include/exp_func_doub.hpp"
 
 
 
@@ -40,6 +42,27 @@ SCENARIO( "Cuadratic exploration function can be used" )
             THEN("Must provide the position x")
             {
                 REQUIRE((*my_explorer)(try_this, slot) == (slot*slot));
+            }
+        }
+    }
+}
+
+
+SCENARIO( "Doubly exploration function can be used" )
+{
+    GIVEN("An object of class exploration function that can be turned into a doubly version")
+    {
+        dni try_this;
+        exp_func<dni>* my_explorer;
+        hash_func<dni>* my_hasher;
+        my_explorer = new exp_func_doub<dni>(my_hasher, 2);
+        WHEN("Used the operator () in the slot = x")
+        {
+            int slot = 3;
+            THEN("Must provide the position x")
+            {
+                    REQUIRE((*my_explorer)(try_this, slot) == 0);
+            
             }
         }
     }
