@@ -7,6 +7,7 @@ counter dni::cntr_;
 dni::dni()
 {
     value_ = rand() % BOUND;
+    lvalue_ = value_;
     length_ = std::to_string(value_).length();
 }
 
@@ -95,6 +96,13 @@ bool dni::operator<= (dni& r_value)
     dni::cntr_.increase();
     return this->value() <= r_value.value();
 }
+
+
+dni::operator unsigned long() const
+{
+    return lvalue_;
+}
+
 
 void dni::inc(void)
 {

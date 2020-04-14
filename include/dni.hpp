@@ -8,6 +8,7 @@ class dni
 {
     private:
         int             value_;
+        unsigned long   lvalue_;
         int             length_;
         static counter  cntr_;
     
@@ -29,9 +30,10 @@ class dni
         bool operator>= (dni& r_value);
         bool operator<= (dni& r_value);
 
+        operator unsigned long() const;
+
         static void reset_c(void);
 
-        //operator unsigned long();
     private:
         void inc(void);
 };
