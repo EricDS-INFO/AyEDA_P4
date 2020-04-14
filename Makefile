@@ -48,7 +48,7 @@ dirs:
 
 .PHONY: clean
 clean:
-	@echo "Deleting $(BIN_NAME) symlink"
+	@echo "Deleting $(BIN_NAME) and $(TEST_NAME) symlink"
 	@$(RM) $(BIN_NAME)
 	@$(RM) $(TEST_NAME)
 	@echo "Deleting directories"
