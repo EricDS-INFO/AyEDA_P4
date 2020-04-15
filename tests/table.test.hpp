@@ -189,6 +189,10 @@ SCENARIO( "Testing advance hash table", "[structure]" )
             std::cout << "this k7: " << key_7.value() % stable_sz << "\n";
             
                CHECK(forth_table.insert(key_7) == true);
+
+            std::cout << "this k8: " << key_8.value() % stable_sz << "\n";
+                // this key doesn't fit so it will fail
+               CHECK(forth_table.insert(key_8) == false);
             }
         }
     }

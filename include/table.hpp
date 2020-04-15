@@ -43,6 +43,11 @@ public:
     bool insert(KEY key_o);
 
     void clean();
+
+    std::ostream& write(std::ostream& os);
+
+    template<class T>
+    friend std::ostream& operator<< (std::ostream& os, table<T> table);
 };
 
 
@@ -168,24 +173,18 @@ bool table<KEY>::insert(KEY key_o)
                 return false;
         }
 
-        std::cout << "i value at begining: " << i << "\n";
-        std::cout << "limit value at begining: " << limit << "\n";
         while( i != limit )
         {
-                std::cout << "pos: " << ((*hasher_)(key_o) + (*explorer_)(key_o, i) % size()) << "\n";            
                 if (slots_[((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size()]->insert(key_o))
                 {
-                    std::cout << ((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size() << "\n";
                     return true;
                 }
             
 
                 (i == size() - 1) ? i = 0 : i ++; 
 
-                std::cout << "pos: " << ((*hasher_)(key_o) + (*explorer_)(key_o, i) % size()) << "\n";            
                 if (slots_[((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size()]->insert(key_o))
                 {
-                    std::cout << ((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size() << "\n";
                     return true;
                 }
             
@@ -194,6 +193,7 @@ bool table<KEY>::insert(KEY key_o)
 
              
     }
+    return false;
     
 }
 
@@ -205,4 +205,25 @@ void table<KEY>::clean()
     {
         slots_[i]->clean();
     }
+}
+
+template<class KEY>
+std::ostream& table<KEY>::write(std::ostream& os)
+{
+    for (int i = 0; i < slot_size(); i++)
+    {
+        for (int j = 0; j < size( );  j++)
+        {
+            os << "|" <<slots_[j][0][i] << "|" ;
+        }
+        os << "\n";
+    }
+    return os;
+}
+
+template<class KEY>
+std::ostream& operator<< (std::ostream& os, table<KEY> table)
+{
+    table.write(os);
+    return os;
 }

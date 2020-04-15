@@ -18,6 +18,7 @@ class slot
         int elements(void);
         bool full(void);
         
+        KEY& at(int pos) {return keys_[pos]; }
         KEY& operator[](int pos) { return keys_[pos]; }
         
         bool insert(KEY& key_t);
@@ -145,11 +146,9 @@ void slot<KEY>::clean()
 template<class KEY>
 std::ostream& operator<< (std::ostream& os, slot<KEY>& slot)
 {
-    os << "\n__________________\n";
     for (int i = 0; i < slot.size(); i++)
     {
-        os << slot[i] << "\n";
-    }
-    os << "__________________\n";
+        os << slot[i] << "";
+    }           
     return os;
 }

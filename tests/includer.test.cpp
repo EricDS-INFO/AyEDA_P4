@@ -7,4 +7,3 @@
 #include "./counter.test.hpp"
 #include "./e_func.test.hpp"
 #include "./h_func.test.hpp"
-#include "./hash.test.hpp"

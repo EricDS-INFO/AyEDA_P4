@@ -30,40 +30,68 @@ std::ostream& operator<< (std::ostream& os, dni& dni_t)
 {
     switch( dni_t.length() )
     {
+        case 0:
+            os << " 0000000" <<  dni_t.value() << " ";
+            break;    
         case 1:
-            os << "- 0000000" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)
+                os << " 0000000" <<  dni_t.value() << " ";
+            else 
+                os << "          ";  
             break;
 
         case 2:
-            os << "- 000000" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)
+                os << " 000000" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 3:
-            os << "- 00000" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)    
+                os << " 00000" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 4:
-            os << "- 0000" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)    
+                os << " 0000" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 5:
-            os << "- 000" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)    
+                os << " 000" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 6:
-            os << "- 00" <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)    
+                os << " 00" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 7:
-            os << "- 0" <<  dni_t.value() << " -\n";
+
+            if (dni_t.value() != -1)
+                os << " 0" <<  dni_t.value() << " ";
+            else 
+                os << "          ";            
             break;
 
         case 8:
-            os << "- " <<  dni_t.value() << " -\n";
+            if (dni_t.value() != -1)
+                os << " " <<  dni_t.value() << " ";
+            else 
+                os << "          ";
             break;
 
         default:
-            os << "- XXXXXXXX -\n";
+            os << " XXXXXXXX ";
             break;
     }
     return os;
