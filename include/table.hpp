@@ -35,12 +35,14 @@ public:
     // Getters
     int size() { return sz_; }
     int slot_size() { return slt_sz_; }
+    slot<KEY>* at(KEY key_o) { return slots_[(*hasher_)(key_o)]; }
     std::string hasher() const; 
     std::string explorer() const; 
 
     bool search(KEY key_o);
-
     bool insert(KEY key_o);
+
+    void clean();
 };
 
 
@@ -138,9 +140,20 @@ bool table<KEY>::search(KEY key_o)
 {
     return slots_[(*hasher_)(key_o)]->sec_search(key_o);
 }
+
 template<class KEY>
 bool table<KEY>::insert(KEY key_o)
 {
 
     return slots_[(*hasher_)(key_o)]->insert(key_o);
+}
+
+
+template<class KEY>
+void table<KEY>::clean()
+{
+    for (int i = 0; i < size(); i++)
+    {
+        slots_[i]->clean();
+    }
 }

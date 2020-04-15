@@ -24,6 +24,8 @@ class slot
         bool sec_search(KEY key_t);
         bool bin_search(KEY key_t);
 
+        void clean();
+
    template <class T> 
    friend std::ostream& operator<<  (std::ostream& os, slot<T>& slot);   
 };
@@ -34,7 +36,7 @@ slot<KEY>::slot(int size)
     keys_.resize(size);
     for (int i  = 0; i < keys_.size(); i++)
     {
-        keys_[i].set_none();
+        keys_[i].value(-1);
     } 
 }
 
@@ -60,7 +62,7 @@ int slot<KEY>::elements(void)
             n_elms ++;
 
     }
-
+    
     return n_elms;
 }
 
@@ -124,6 +126,18 @@ bool slot<KEY>::bin_search(KEY key_t)
         return true;
     return false;
 }
+
+template<class KEY>
+void slot<KEY>::clean()
+{
+    for (int i = 0; i < size(); i++)
+    {
+        keys_[i].value(-1);
+    }
+    
+}
+
+
 template<class KEY>
 std::ostream& operator<< (std::ostream& os, slot<KEY>& slot)
 {

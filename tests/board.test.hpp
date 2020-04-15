@@ -6,7 +6,7 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
 {
     GIVEN( "A table with a certain size " )
     {
-        int table_sz = 5, slot_sz = 2, h_fun_t = 1, e_fun_t = 1;
+        int table_sz = 1000, slot_sz = 2, h_fun_t = 1, e_fun_t = 1;
         table<dni> first_table(table_sz, slot_sz, h_fun_t, e_fun_t);
 
         CHECK(table_sz > 0);
@@ -54,13 +54,31 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
                 REQUIRE(first_table.search(test_key) == false);
             }
         }
-        AND_WHEN( "Searched a key element that was inserted " )
+        AND_WHEN( "Searched a single key element that was inserted " )
         {
             dni test_key;
             THEN( "The result must be true " )
             {
                 CHECK(first_table.insert(test_key) == true);
                 REQUIRE(first_table.search(test_key) == true);
+            }
+            AND_THEN ("The hash table slot isn't full")
+            {
+                REQUIRE(first_table.at(test_key)->full() == false);
+            }
+        }
+
+        AND_WHEN( "Inserted 3 equal elements" )
+        {
+            first_table.clean();
+            dni key_1;
+            THEN( "The search must be true the 2 first times and the full state must be true" )
+            {
+                CHECK(first_table.insert(key_1) == true);
+                CHECK(first_table.insert(key_1) == true);
+                CHECK(first_table.insert(key_1) == false);
+                REQUIRE(first_table.search(key_1) == true);
+                REQUIRE(first_table.at(key_1)->full() == true);
             }
         }
     }
