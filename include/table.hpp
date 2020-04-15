@@ -39,6 +39,8 @@ public:
     std::string explorer() const; 
 
     bool search(KEY key_o);
+
+    bool insert(KEY key_o);
 };
 
 
@@ -135,4 +137,10 @@ template<class KEY>
 bool table<KEY>::search(KEY key_o)
 {
     return slots_[(*hasher_)(key_o)]->sec_search(key_o);
+}
+template<class KEY>
+bool table<KEY>::insert(KEY key_o)
+{
+
+    return slots_[(*hasher_)(key_o)]->insert(key_o);
 }

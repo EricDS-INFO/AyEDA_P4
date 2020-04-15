@@ -54,5 +54,14 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
                 REQUIRE(first_table.search(test_key) == false);
             }
         }
+        AND_WHEN( "Searched a key element that was inserted " )
+        {
+            dni test_key;
+            THEN( "The result must be true " )
+            {
+                CHECK(first_table.insert(test_key) == true);
+                REQUIRE(first_table.search(test_key) == true);
+            }
+        }
     }
 }
