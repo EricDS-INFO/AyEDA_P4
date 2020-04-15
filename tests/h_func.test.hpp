@@ -40,7 +40,7 @@ SCENARIO( "hash funtion can be used and turned into an Add type " )
         int slots = 1000;
         hash_func<dni>* my_hasher;
         my_hasher = new hash_func_add<dni>(slots);
-        WHEN( "Turned into a adder hasher with 997 slots" )
+        WHEN( "Turned into a adder hasher with 1000 slots" )
         {
              THEN( "Must provide a different position for two keys" )
              {
@@ -58,13 +58,18 @@ SCENARIO( "hash funtion can be used and turned into a pseudo-random type " )
 {
     GIVEN( "A hash function" )
     {
-        int slots = 4; 
+        int slots = 1000; 
         hash_func<dni>* my_hasher;
         my_hasher = new hash_func_pseRand<dni>(slots);
-        WHEN( "Turned into a ")
+        WHEN( "Turned into a pseudo-random hasher with 1000 slots" )
         {
+             THEN( "Must provide a different position for two keys" )
+             {
+                 dni key_1;
+                 dni key_2;
+                 CHECK((*my_hasher)(key_1) != (*my_hasher)(key_2));
+             }
         }
-
     }
 
 }

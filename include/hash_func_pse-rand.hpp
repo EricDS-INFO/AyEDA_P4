@@ -1,5 +1,6 @@
 #pragma once
 #include "hash_func.hpp"
+#include <cstdlib>
 
 template<class KEY>
 class hash_func_pseRand: public hash_func<KEY>
@@ -16,5 +17,5 @@ class hash_func_pseRand: public hash_func<KEY>
 template<class KEY>
 int hash_func_pseRand<KEY>::operator() ( KEY& key_t)
 {
-    return 0;
+    return rand() % n_slots_ ;
 }
