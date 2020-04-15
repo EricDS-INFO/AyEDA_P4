@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "../include/catch/catch.h"
 
-#include "./board.test.hpp"
+#include "./table.test.hpp"
 #include "./slot.test.hpp"
 #include "./dni.test.hpp"
 #include "./counter.test.hpp"

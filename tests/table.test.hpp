@@ -105,3 +105,91 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
         }
     }
 }
+
+SCENARIO( "Testing one slot hash table", "[structure]" )
+{
+    GIVEN( "A table with 1 slot " )
+    {
+        int table_sz = 1, slot_sz = 2, h_fun_t = 1, e_fun_t = 1;
+        table<dni> third_table(table_sz, slot_sz, h_fun_t, e_fun_t);
+
+        CHECK(table_sz > 0);
+        CHECK(slot_sz >= 1);
+        CHECK(h_fun_t >= 1); CHECK(h_fun_t <= 3);
+        CHECK(h_fun_t >= 1); CHECK(h_fun_t <= 4);
+        
+        WHEN( "Inserted 3 different elements" )
+        {
+            third_table.clean();
+            dni key_1;
+            dni key_2;
+            dni key_3;
+
+            CHECK(third_table.insert(key_1) == true);
+            CHECK(third_table.insert(key_2) == true);
+            THEN( "The third element fails at insertion" )
+            {
+                REQUIRE(third_table.insert(key_3) == false);
+            }
+        }
+    }
+}
+
+
+SCENARIO( "Testing advance hash table", "[structure]" )
+{
+    GIVEN( "A table with 3 slots but 1 cell per slot" )
+    {
+        int stable_sz = 7, slot_sz = 1, h_fun_t = 1, e_fun_t = 4;
+        table<dni> forth_table(stable_sz, slot_sz, h_fun_t, e_fun_t);
+
+        CHECK(stable_sz > 0);
+        CHECK(slot_sz >= 1);
+        CHECK(h_fun_t >= 1); CHECK(h_fun_t <= 3);
+        CHECK(h_fun_t >= 1); CHECK(h_fun_t <= 4);
+        
+        WHEN( "Inserted 3 different elements | high colision probability" )
+        {
+            forth_table.clean();
+            
+            dni key_1;
+            dni key_2;
+            dni key_3;
+            dni key_4;
+            dni key_5;
+            dni key_6;
+            dni key_7;
+            dni key_8;
+            dni key_9;
+ 
+
+             
+            
+            THEN( "The third element wins at insertion" )
+            {
+
+            std::cout << "this k1: " << key_1.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_1) == true);
+
+            std::cout << "this k2: " << key_2.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_2) == true);     
+
+            std::cout << "this k3: " << key_3.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_3) == true);
+
+            std::cout << "this k4: " << key_4.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_4) == true);
+            
+            std::cout << "this k5: " << key_5.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_5) == true);     
+            
+            std::cout << "this k6: " << key_6.value() % stable_sz << "\n";
+               CHECK(forth_table.insert(key_6) == true);
+            
+            std::cout << "this k7: " << key_7.value() % stable_sz << "\n";
+            
+               CHECK(forth_table.insert(key_7) == true);
+            }
+        }
+    }
+}

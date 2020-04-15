@@ -138,14 +138,63 @@ std::string table<KEY>::explorer() const
 template<class KEY>
 bool table<KEY>::search(KEY key_o)
 {
-    return slots_[(*hasher_)(key_o)]->sec_search(key_o);
+    for(int i = 0; i < size(); i++)
+    {
+        if(slots_[i]->bin_search(key_o))
+            return true;
+    }
+    return false;
 }
 
 template<class KEY>
 bool table<KEY>::insert(KEY key_o)
 {
+    if (search(key_o))
+        return false;
+    if (slots_[(*hasher_)(key_o)]->insert(key_o))
+    {
+        return true;
+    }
+    else
+    {
+        int i = (*hasher_)(key_o);
+        int limit;
+        if ( i == 0)
+            limit = table<KEY>::sz_ - 1 ;
+        else
+        { 
+            limit = (*hasher_)(key_o) - 1;
+            if (limit == i)
+                return false;
+        }
 
-    return slots_[(*hasher_)(key_o)]->insert(key_o);
+        std::cout << "i value at begining: " << i << "\n";
+        std::cout << "limit value at begining: " << limit << "\n";
+        while( i != limit )
+        {
+                std::cout << "pos: " << ((*hasher_)(key_o) + (*explorer_)(key_o, i) % size()) << "\n";            
+                if (slots_[((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size()]->insert(key_o))
+                {
+                    std::cout << ((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size() << "\n";
+                    return true;
+                }
+            
+
+                (i == size() - 1) ? i = 0 : i ++; 
+
+                std::cout << "pos: " << ((*hasher_)(key_o) + (*explorer_)(key_o, i) % size()) << "\n";            
+                if (slots_[((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size()]->insert(key_o))
+                {
+                    std::cout << ((*hasher_)(key_o) + (*explorer_)(key_o, i)) % size() << "\n";
+                    return true;
+                }
+            
+
+        }
+
+             
+    }
+    
 }
 
 
