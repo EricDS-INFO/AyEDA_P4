@@ -46,5 +46,13 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
                 REQUIRE(first_table.explorer() == "Linear");
             }
         }
+        AND_WHEN( "Searched a key element wich doesn't exist " )
+        {
+            dni test_key;
+            THEN( "The result must be false " )
+            {
+                REQUIRE(first_table.search(test_key) == false);
+            }
+        }
     }
 }

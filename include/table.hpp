@@ -32,11 +32,13 @@ public:
     table(int tb_sz, int sl_sz, int t_hash, int t_expl);
     ~table();
 
+    // Getters
     int size() { return sz_; }
     int slot_size() { return slt_sz_; }
     std::string hasher() const; 
     std::string explorer() const; 
 
+    bool search(KEY key_o);
 };
 
 
@@ -127,3 +129,10 @@ std::string table<KEY>::explorer() const
             "Rehash") ) );
 
 } 
+
+
+template<class KEY>
+bool table<KEY>::search(KEY key_o)
+{
+    return false;
+}
