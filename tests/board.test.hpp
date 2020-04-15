@@ -68,18 +68,39 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
             }
         }
 
-        AND_WHEN( "Inserted 3 equal elements" )
+        AND_WHEN( "Inserted 2 equal elements" )
         {
             first_table.clean();
             dni key_1;
+
+            CHECK(first_table.insert(key_1) == true);
             THEN( "The search must be true the first time and the full state must be false" )
             {
                 // Just a sigle element can be added
-                CHECK(first_table.insert(key_1) == true);
-                CHECK(first_table.insert(key_1) == false);
-                CHECK(first_table.insert(key_1) == false);
+                REQUIRE(first_table.insert(key_1) == false);
                 REQUIRE(first_table.search(key_1) == true);
                 REQUIRE(first_table.at(key_1)->full() == false);
+            }
+        }
+        AND_WHEN( "Inserted 3 different elements" )
+        {
+            first_table.clean();
+            dni key_1;
+            dni key_2;
+            dni key_3;
+
+            CHECK(first_table.insert(key_1) == true);
+            CHECK(first_table.insert(key_2) == true);
+            THEN( "The search must be true all the times due to hashing" )
+            {
+                // Just a sigle element can be added
+                REQUIRE(first_table.insert(key_3) == true);
+                REQUIRE(first_table.search(key_1) == true);
+                REQUIRE(first_table.search(key_2) == true);
+                REQUIRE(first_table.search(key_3) == true);
+                REQUIRE(first_table.at(key_1)->full() == false);
+                REQUIRE(first_table.at(key_2)->full() == false);
+                REQUIRE(first_table.at(key_3)->full() == false);
             }
         }
     }
