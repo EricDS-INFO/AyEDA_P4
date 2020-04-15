@@ -11,11 +11,11 @@ class hash_func_pseRand: public hash_func<KEY>
         hash_func_pseRand(int n_slots = 0):
         n_slots_(n_slots){}
         ~hash_func_pseRand();
-        int operator() ( KEY& key_t);
+        int operator() (const KEY& key_t);
 };
 
 template<class KEY>
-int hash_func_pseRand<KEY>::operator() ( KEY& key_t)
+int hash_func_pseRand<KEY>::operator() (const KEY& key_t)
 {
     return rand() % n_slots_ ;
 }

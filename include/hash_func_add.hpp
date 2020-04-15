@@ -12,12 +12,12 @@ class hash_func_add: public hash_func<KEY>
         
         ~hash_func_add();
         
-        int operator() ( KEY& key_t);
+        int operator() (const KEY& key_t);
         int last_p();
 };
 
 template <class KEY>
-int hash_func_add<KEY>::operator() ( KEY& key_t)
+int hash_func_add<KEY>::operator() (const KEY& key_t)
 {
     int d = 0;
     int y;

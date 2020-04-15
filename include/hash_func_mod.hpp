@@ -9,14 +9,14 @@ class hash_func_mod: public hash_func<KEY>
     public:
         hash_func_mod(int n_slots = 0):n_slots_(n_slots){}
         ~hash_func_mod();
-        int operator() ( KEY& key_t);
+        int operator() (const KEY& key_t);
 
         int last_p();
 };
 
 
 template<class KEY>
-int hash_func_mod<KEY>::operator() ( KEY& key_t)
+int hash_func_mod<KEY>::operator() (const KEY& key_t)
 {
     
     return key_t.value() % last_p();

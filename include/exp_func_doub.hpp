@@ -1,6 +1,9 @@
 #pragma once
 #include "exp_func.hpp"
-#include "hash_func.hpp"
+#include "hash_func_add.hpp"
+#include "hash_func_mod.hpp"
+#include "hash_func_pse-rand.hpp"
+
 
 template<class KEY>
 class exp_func_doub: public exp_func<KEY>
@@ -10,16 +13,18 @@ class exp_func_doub: public exp_func<KEY>
         hash_func<KEY>*  h_function_;
     
     public:
-        exp_func_doub(hash_func<KEY>* h_function, int slot_num = 0): 
-        slot_num_(slot_num),
-        h_function_(h_function){};
+        exp_func_doub(int slot_num = 0):
+        slot_num_(slot_num)
+        { h_function_ = new hash_func_add<KEY>(slot_num_); }
         
         ~exp_func_doub(){};
     int operator() (const KEY& key_t, int val);
 };
 
+
+
 template<class KEY>
 int exp_func_doub<KEY>::operator() (const KEY& key_t, int val)
 {
-    return 0;
+    return val * (*h_function_)(key_t);
 }

@@ -1,6 +1,6 @@
 #include "../include/catch/catch.h"
 #include "../include/dni.hpp"
-#include "../include/hash_func.hpp"
+#include "../include/hash_func_add.hpp"
 #include "../include/exp_func_lin.hpp"
 #include "../include/exp_func_cuad.hpp"
 #include "../include/exp_func_doub.hpp"
@@ -55,14 +55,15 @@ SCENARIO( "Doubly exploration function can be used" )
         dni try_this;
         exp_func<dni>* my_explorer;
         hash_func<dni>* my_hasher;
-        my_explorer = new exp_func_doub<dni>(my_hasher, 2);
+        my_hasher = new hash_func_add<dni>(1000);
+        my_explorer = new exp_func_doub<dni>(1000);
+        
         WHEN("Used the operator () in the slot = x")
         {
             int slot = 3;
             THEN("Must provide the position x")
             {
-                    REQUIRE((*my_explorer)(try_this, slot) == 0);
-            
+                   REQUIRE( (*my_explorer)(try_this, slot) == ((*my_hasher)(try_this) * slot));
             }
         }
     }

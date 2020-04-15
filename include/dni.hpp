@@ -17,8 +17,9 @@ class dni
         dni(int seed);
         ~dni();
 
-        inline int value() { return value_; }
-        inline int value(int value) { value_ = value; }
+        inline  int value() const { return value_; }
+        
+        inline  void value(int value) { value_ = value; } 
         
         static int nth_compare(); 
         inline void set_none(void){ value_ = -1;}
