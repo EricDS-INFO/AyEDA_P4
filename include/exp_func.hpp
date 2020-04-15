@@ -9,6 +9,8 @@ class exp_func
 
         exp_func(int slot_num = 0): 
         slot_num_(slot_num){}
+
+
         ~exp_func(){}
         virtual int operator() (const KEY& key_t, int val)=0;
 };

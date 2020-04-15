@@ -4,6 +4,7 @@
 #include "../include/exp_func_lin.hpp"
 #include "../include/exp_func_cuad.hpp"
 #include "../include/exp_func_doub.hpp"
+#include "../include/exp_func_rehash.hpp"
 
 
 
@@ -64,6 +65,36 @@ SCENARIO( "Doubly exploration function can be used" )
             THEN("Must provide the position x")
             {
                    REQUIRE( (*my_explorer)(try_this, slot) == ((*my_hasher)(try_this) * slot));
+            }
+        }
+    }
+}
+
+
+SCENARIO( "re-hashing exploration function can be used" )
+{
+    GIVEN("An object of class exploration function that can be turned into a re-hahsing one")
+    {
+        int slots = 1000;
+        exp_func<dni>* my_explorer;
+        my_explorer = new exp_func_rehash<dni>(1000);
+        
+        WHEN("Used the operator () in the slot = x")
+        {
+            int slot = 3;
+            THEN("Must provide different positions for different keys")
+            {
+                dni key_1;
+                dni key_2;
+        
+                CHECK( (*my_explorer)(key_1, slot) != (*my_explorer)(key_2, slot) );
+            }
+            AND_THEN("Must provide equal positions for the same key")
+            {
+                dni key_1;
+                dni key_2;
+        
+                CHECK( (*my_explorer)(key_1, slot) == (*my_explorer)(key_1, slot) );
             }
         }
     }
