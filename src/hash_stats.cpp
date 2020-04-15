@@ -37,7 +37,7 @@ int main(void)
         experiment_h.insert(keys[i]);    
 
     experiment_h.write(std::cout);
-    int min = 0;
+    int min = 100000000;
     int max = 0;
     int med = 0;
 
@@ -45,21 +45,27 @@ int main(void)
     std::cout << "\n\n\n\tCeldas\tClaves\tDispersion\tExploracion\tCarga\tPruebas\n";
     std::cout << "\t" << experiment_h.size();
     std::cout << "\t" << experiment_h.slot_size();
-    std::cout << "\t\t" << experiment_h.hasher();
-    std::cout << "\t" << experiment_h.explorer();
-    std::cout << "\t" << load;
+    std::cout << "\t" << experiment_h.hasher();
+    std::cout << "\t\t" << experiment_h.explorer();
+    std::cout << "\t\t" << load;
     std::cout << "\t" << loops;
     
 
     dni::reset_c();
-    experiment_h.search(keys[0]);
-    std::cout << dni::nth_compare(); 
-    min = dni::nth_compare();
-    med = dni::nth_compare();
-    max = dni::nth_compare();
+    
+    for (int i = 0; i < n; i++)
+    {
+        experiment_h.search(keys[i]);
+        if (dni::nth_compare() > max)
+            max = dni::nth_compare();
+        if (dni::nth_compare() < min)
+            min = dni::nth_compare();
+        med += dni::nth_compare();
+    }
+    med = med/n;
     std::cout <<"\n\n\t\t\tMinimo\tMedio\tMaximo\n";
     std::cout << "\tBusquedas:\t" << min << "\t" <<med<< "\t" << max;
-    std::cout << "\tInsercion:\t" << min << "\t" <<med<< "\t" << max;
+    std::cout << "\n\tInsercion:\t" << min << "\t" <<med<< "\t" << max;
 
     return 0; 
 }
