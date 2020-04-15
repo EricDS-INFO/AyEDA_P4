@@ -72,13 +72,14 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
         {
             first_table.clean();
             dni key_1;
-            THEN( "The search must be true the 2 first times and the full state must be true" )
+            THEN( "The search must be true the first time and the full state must be false" )
             {
-                CHECK(first_table.insert(key_1) == true);
+                // Just a sigle element can be added
                 CHECK(first_table.insert(key_1) == true);
                 CHECK(first_table.insert(key_1) == false);
+                CHECK(first_table.insert(key_1) == false);
                 REQUIRE(first_table.search(key_1) == true);
-                REQUIRE(first_table.at(key_1)->full() == true);
+                REQUIRE(first_table.at(key_1)->full() == false);
             }
         }
     }

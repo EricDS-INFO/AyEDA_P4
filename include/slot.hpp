@@ -75,12 +75,16 @@ bool slot<KEY>::full(void)
 template<class KEY>
 bool slot<KEY>::insert(KEY& key_t)
 {
+    if(bin_search(key_t))
+        return false;
+
     for (int i = 0; i < size(); i++)
     {
-        if (keys_[i].value() == -1)
+        if ((keys_[i].value() == -1))
         {
-            keys_[i] = key_t;
-            return true;
+                keys_[i] = key_t;
+                return true;
+
         }
     }
     return false;
