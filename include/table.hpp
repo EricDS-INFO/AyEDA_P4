@@ -57,36 +57,36 @@ table<KEY>::table(int tb_sz, int slt_sz, int t_hash, int t_expl)
     switch(t_hash)
     {
         case 1:
-            hasher_ = new hash_func_mod<KEY>();
+            hasher_ = new hash_func_mod<KEY>(sz_);
             break;
         case 2:
-            hasher_ = new hash_func_add<KEY>();
+            hasher_ = new hash_func_add<KEY>(sz_);
             break;
         case 3:
-            hasher_ = new hash_func_pseRand<KEY>();
+            hasher_ = new hash_func_pseRand<KEY>(sz_);
             break;
         default:
-            hasher_ = new hash_func_mod<KEY>();
+            hasher_ = new hash_func_mod<KEY>(sz_);
             break;
     }
     switch(t_expl)
     {
         case 1:
-            explorer_ = new exp_func_lin<KEY>();
+            explorer_ = new exp_func_lin<KEY>(sz_);
             break;
         case 2:
-            explorer_ = new exp_func_cuad<KEY>();
+            explorer_ = new exp_func_cuad<KEY>(sz_);
             break;
         case 3:
-            explorer_ = new exp_func_doub<KEY>();
+            explorer_ = new exp_func_doub<KEY>(sz_);
             break;
 
         case 4:
-            explorer_ = new exp_func_rehash<KEY>();
+            explorer_ = new exp_func_rehash<KEY>(sz_);
             break;
 
         default:
-            explorer_ = new exp_func_lin<KEY>();
+            explorer_ = new exp_func_lin<KEY>(sz_);
             break;
     }
 }
@@ -134,5 +134,5 @@ std::string table<KEY>::explorer() const
 template<class KEY>
 bool table<KEY>::search(KEY key_o)
 {
-    return false;
+    return slots_[(*hasher_)(key_o)]->sec_search(key_o);
 }
