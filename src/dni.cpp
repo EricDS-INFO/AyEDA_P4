@@ -3,6 +3,9 @@
 
 
 #define BOUND 100000000
+
+
+
 counter dni::cntr_; 
 dni::dni()
 {
@@ -69,32 +72,32 @@ std::ostream& operator<< (std::ostream& os, dni& dni_t)
 bool dni::operator== (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() == r_value.value();
+    return value() == r_value.value();
 }
 bool dni::operator!= (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() != r_value.value();
+    return value() != r_value.value();
 }
 bool dni::operator> (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() > r_value.value();
+    return value() > r_value.value();
 }
 bool dni::operator< (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() < r_value.value();
+    return value() < r_value.value();
 }
 bool dni::operator>= (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() >= r_value.value();
+    return value() >= r_value.value();
 }
 bool dni::operator<= (dni& r_value)
 {
     dni::cntr_.increase();
-    return this->value() <= r_value.value();
+    return value() <= r_value.value();
 }
 
 

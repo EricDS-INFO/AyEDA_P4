@@ -18,6 +18,8 @@ class dni
         ~dni();
 
         inline int value() { return value_; }
+        inline int value(int value) { value_ = value; }
+        
         static int nth_compare(); 
         inline void set_none(void){ value_ = -1;}
         inline int length() { return length_; }
@@ -29,6 +31,7 @@ class dni
         bool operator< (dni& r_value);
         bool operator>= (dni& r_value);
         bool operator<= (dni& r_value);
+
 
         operator unsigned long() const;
 

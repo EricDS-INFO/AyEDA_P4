@@ -33,22 +33,38 @@ SCENARIO( "Slot object can be created as DNI keys", "[structure]" )
         }
         AND_WHEN( "The slot is filled" )
         {
-            dni dni_1;
-            dni dni_2;
-            first_slot.insert(dni_1);
-            first_slot.insert(dni_2);
-
+            
             THEN ( "number of elements increase but still not full" )
             {
+
+                dni dni_1;
+                dni dni_2;
+
+                first_slot.insert(dni_1);
+                first_slot.insert(dni_2);
+
                 REQUIRE(first_slot.elements() == 2);
                 REQUIRE(first_slot.full() == true);
             }
             AND_THEN ("A key can be searched in the slot")
             {
+
+                dni dni_1;
+                dni dni_2;
                 dni dni_3;
+
+                first_slot.insert(dni_1);
+                first_slot.insert(dni_2);
+            
+                std::cout << dni_1 << std::endl;
+                std::cout << dni_2 << std::endl;
+                std::cout << first_slot << std::endl;
+
                 REQUIRE(first_slot.sec_search(dni_1));
                 REQUIRE(first_slot.bin_search(dni_2));
                 REQUIRE(!first_slot.bin_search(dni_3));
+            
+                
             }
         }
     }

@@ -18,10 +18,14 @@ class slot
         int elements(void);
         bool full(void);
         
+        KEY& operator[](int pos) { return keys_[pos]; }
         
         bool insert(KEY& key_t);
         bool sec_search(KEY key_t);
         bool bin_search(KEY key_t);
+
+   template <class T> 
+   friend std::ostream& operator<<  (std::ostream& os, slot<T>& slot);   
 };
 
 template<class KEY>
@@ -104,7 +108,7 @@ bool slot<KEY>::bin_search(KEY key_t)
     while (start < end)
     {
         position = (start + end) / 2;
-        if (keys_[ position ] == key_t)
+        if (keys_[position] == key_t)
         {
             return true;
         }
@@ -119,4 +123,15 @@ bool slot<KEY>::bin_search(KEY key_t)
     if ( keys_[start] == key_t )
         return true;
     return false;
+}
+template<class KEY>
+std::ostream& operator<< (std::ostream& os, slot<KEY>& slot)
+{
+    os << "\n__________________\n";
+    for (int i = 0; i < slot.size(); i++)
+    {
+        os << slot[i] << "\n";
+    }
+    os << "__________________\n";
+    return os;
 }
