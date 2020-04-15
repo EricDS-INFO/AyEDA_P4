@@ -34,7 +34,7 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
 
             THEN( "Should provide the correct name" )
             {
-                REQUIRE(first_table.hasher() == "Add");
+                REQUIRE(first_table.hasher() == "Module");
             }
         }
 
@@ -43,7 +43,7 @@ SCENARIO( "Testing the creation of a hash table", "[structure]" )
 
             THEN( "Should provide the correct value" )
             {
-                REQUIRE(first_table.explorer() == "Lin");
+                REQUIRE(first_table.explorer() == "Linear");
             }
         }
     }

@@ -1,5 +1,9 @@
 #pragma once
 
+#include<typeinfo>
+#include<cxxabi.h>
+
+
 #include "slot.hpp"
 // Hash functions
 #include "hash_func_add.hpp"
@@ -10,6 +14,8 @@
 #include "exp_func_doub.hpp"
 #include "exp_func_lin.hpp"
 #include "exp_func_rehash.hpp"
+
+
 
 template<class KEY>
 class table
@@ -28,8 +34,8 @@ public:
 
     int size() { return sz_; }
     int slot_size() { return slt_sz_; }
-    std::string hasher() const { return "Add"; } 
-    std::string explorer() const { return "Lin"; } 
+    std::string hasher() const; 
+    std::string explorer() const; 
 
 };
 
@@ -93,3 +99,31 @@ table<KEY>::~table()
     delete slots_;
     sz_ = 0;
 }
+template <class KEY>
+std::string table<KEY>::hasher() const 
+{   
+    std::string current = typeid(*hasher_).name();
+    std::string mod_case =  typeid(hash_func_mod<KEY>).name();
+    std::string add_case =  typeid(hash_func_add<KEY>).name();
+    std::string pr_case =  typeid(hash_func_pseRand<KEY>).name();
+
+    return (current == mod_case ? "Module" : 
+           (current == add_case ? "Add" : "PseudoRandom" ) );
+} 
+
+template <class KEY>
+std::string table<KEY>::explorer() const 
+{
+    
+    std::string current  =  typeid(*explorer_).name();
+    std::string cuad_case =  typeid(exp_func_cuad<KEY>).name();
+    std::string doub_case =  typeid(exp_func_doub<KEY>).name();
+    std::string lin_case  =  typeid(exp_func_lin<KEY>).name();
+    std::string rh_case  =  typeid(exp_func_rehash<KEY>).name();
+
+    return (current == lin_case ? "Linear" : 
+           (current == cuad_case ? "Cuadratic" : 
+           (current == doub_case ? "Double":
+            "Rehash") ) );
+
+} 
