@@ -46,8 +46,6 @@ public:
 
     std::ostream& write(std::ostream& os);
 
-    template<class T>
-    friend std::ostream& operator<< (std::ostream& os, table<T> table);
 };
 
 
@@ -218,20 +216,5 @@ std::ostream& table<KEY>::write(std::ostream& os)
         }
         os << "\n";
     }
-    return os;
-}
-
-template<class KEY>
-std::ostream& operator<< (std::ostream& os, table<KEY> table)
-{   
-    for (int i = 0; i < table.slot_size(); i++)
-    {
-        for (int j = 0; j < table.size( );  j++)
-        {
-            os << "|" <<table.slots_[j][0][i] << "|" ;
-        }
-        os << "\n";
-    }
- 
     return os;
 }
