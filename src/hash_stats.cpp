@@ -16,7 +16,7 @@ int main(void)
 {
     srand(time(NULL));
     /*Hash Table*/
-    int   slots = 997;
+    int   slots = 17;
     int   blocks = 3;
     table<dni> experiment_1(slots,blocks,1,1);
     
@@ -38,10 +38,29 @@ int main(void)
     initialize_bench(keys, bench_size);
 
     for ( int i = 0; i < n; i++ )
-        experiment_1.insert(keys[i]);    
+        experiment_1.insert(keys[i]); 
+        
+    for ( int i = 0; i < n; i++ )
+        experiment_2.insert(keys[i]); 
+        
+    for ( int i = 0; i < n; i++ )
+        experiment_3.insert(keys[i]); 
+        
+    for ( int i = 0; i < n; i++ )
+        experiment_4.insert(keys[i]);    
 
+
+    std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_4.hasher() << " | " << experiment_4.explorer() << "\n\n";
+    experiment_4.write(std::cout);
+
+    std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_3.hasher() << " | " << experiment_3.explorer() << "\n\n";
+    experiment_3.write(std::cout);
+    
+    std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_2.hasher() << " | " << experiment_2.explorer() << "\n\n";
+    experiment_2.write(std::cout);
+
+    std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_1.hasher() << " | " << experiment_1.explorer() << "\n\n";
     experiment_1.write(std::cout);
-
 
     std::cout << "\n\n\n\tCeldas\tClaves\tDispersion\tExploracion\tCarga\tPruebas\n";
     std::cout << "\t" << experiment_1.size();
