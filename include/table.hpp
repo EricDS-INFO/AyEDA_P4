@@ -9,6 +9,10 @@
 #include "hash_func_add.hpp"
 #include "hash_func_mod.hpp"
 #include "hash_func_pse-rand.hpp"
+
+// MODIFICATION
+#include "../modif/hash_func_add_2.hpp"
+
 // Explore functions
 #include "exp_func_cuad.hpp"
 #include "exp_func_doub.hpp"
@@ -72,6 +76,10 @@ table<KEY>::table(int tb_sz, int slt_sz, int t_hash, int t_expl)
         case 3:
             hasher_ = new hash_func_pseRand<KEY>(sz_);
             break;
+
+        case 4:
+            hasher_ = new hash_func_add_2<KEY>(sz_);
+            break;
         default:
             hasher_ = new hash_func_mod<KEY>(sz_);
             break;
@@ -116,8 +124,12 @@ std::string table<KEY>::hasher() const
     std::string add_case =  typeid(hash_func_add<KEY>).name();
     std::string pr_case =  typeid(hash_func_pseRand<KEY>).name();
 
+    std::string add2_case =  typeid(hash_func_pseRand<KEY>).name();
+
     return (current == mod_case ? "Module" : 
-           (current == add_case ? "Add" : "PseudoRandom" ) );
+           (current == add_case ? "Add" : 
+           (current == pr_case ? "PseudoRandom":
+           "AddTwo") ) );
 } 
 
 template <class KEY>

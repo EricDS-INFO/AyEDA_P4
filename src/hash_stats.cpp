@@ -25,6 +25,10 @@ int main(void)
     table<dni> experiment_3(slots,blocks,3,3);
     
     table<dni> experiment_4(slots,blocks,1,4);
+
+
+// Modification table
+    table<dni> experiment_modif(slots,blocks,4,1);
     
 
     float load = 0.2;
@@ -47,7 +51,10 @@ int main(void)
         experiment_3.insert(keys[i]); 
         
     for ( int i = 0; i < n; i++ )
-        experiment_4.insert(keys[i]);    
+        experiment_4.insert(keys[i]);  
+        
+    for ( int i = 0; i < n; i++ )
+        experiment_modif.insert(keys[i]);    
 
 
     std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_4.hasher() << " | " << experiment_4.explorer() << "\n\n";
@@ -61,6 +68,11 @@ int main(void)
 
     std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA: " << experiment_1.hasher() << " | " << experiment_1.explorer() << "\n\n";
     experiment_1.write(std::cout);
+
+
+
+    std::cout << "\n\n\n\t\t\t\t\t\t\t\t TABLA MODIFICACIÓN: " << experiment_modif.hasher() << " | " << experiment_modif.explorer() << "\n\n";
+    experiment_modif.write(std::cout);
 
     std::cout << "\n\n\n\tCeldas\tClaves\tDispersion\tExploracion\tCarga\tPruebas\n";
     std::cout << "\t" << experiment_1.size();

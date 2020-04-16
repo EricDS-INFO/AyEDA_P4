@@ -27,7 +27,7 @@ class dni
         
         static int nth_compare(); 
         inline void set_none(void){ value_ = -1;}
-        inline int length() { return length_; }
+        inline int length() const { return length_; }
 
         friend std::ostream& operator<< (std::ostream& os, dni& dni_t);
         bool operator== (dni& r_value);
