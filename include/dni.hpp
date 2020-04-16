@@ -2,6 +2,11 @@
 #include <iostream>
 #include <cstdlib>
 
+
+#define BOUND 100000000
+
+
+
 class counter;
 class dni
 {

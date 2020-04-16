@@ -2,9 +2,6 @@
 #include "../include/counter.hpp"
 
 
-#define BOUND 100000000
-
-
 
 counter dni::cntr_; 
 dni::dni()

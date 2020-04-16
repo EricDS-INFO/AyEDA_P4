@@ -16,11 +16,15 @@ int main(void)
 {
     srand(time(NULL));
     /*Hash Table*/
-    int   slots = 15;
+    int   slots = 997;
     int   blocks = 3;
-    int   hasher = 1;
-    int   explorer = 4;
-    table<dni> experiment_h(slots,blocks,hasher,explorer);
+    table<dni> experiment_1(slots,blocks,1,1);
+    
+    table<dni> experiment_2(slots,blocks,2,2);
+    
+    table<dni> experiment_3(slots,blocks,3,3);
+    
+    table<dni> experiment_4(slots,blocks,1,4);
     
 
     float load = 0.2;
@@ -34,28 +38,30 @@ int main(void)
     initialize_bench(keys, bench_size);
 
     for ( int i = 0; i < n; i++ )
-        experiment_h.insert(keys[i]);    
+        experiment_1.insert(keys[i]);    
 
-    experiment_h.write(std::cout);
-    int min = 100000000;
-    int max = 0;
-    int med = 0;
+    experiment_1.write(std::cout);
 
 
     std::cout << "\n\n\n\tCeldas\tClaves\tDispersion\tExploracion\tCarga\tPruebas\n";
-    std::cout << "\t" << experiment_h.size();
-    std::cout << "\t" << experiment_h.slot_size();
-    std::cout << "\t" << experiment_h.hasher();
-    std::cout << "\t\t" << experiment_h.explorer();
+    std::cout << "\t" << experiment_1.size();
+    std::cout << "\t" << experiment_1.slot_size();
+    std::cout << "\t" << experiment_1.hasher();
+    std::cout << "\t\t" << experiment_1.explorer();
     std::cout << "\t\t" << load;
     std::cout << "\t" << loops;
     
 
+    std::cout <<"\n\n\t\t\tMinimo\tMedio\tMaximo\n";
+
+    int min = BOUND;
+    int max = 0;
+    int med = 0;
+
     dni::reset_c();
-    
     for (int i = 0; i < n; i++)
     {
-        experiment_h.search(keys[i]);
+        experiment_1.search(keys[i]);
         if (dni::nth_compare() > max)
             max = dni::nth_compare();
         if (dni::nth_compare() < min)
@@ -63,8 +69,24 @@ int main(void)
         med += dni::nth_compare();
     }
     med = med/n;
-    std::cout <<"\n\n\t\t\tMinimo\tMedio\tMaximo\n";
     std::cout << "\tBusquedas:\t" << min << "\t" <<med<< "\t" << max;
+    
+    min = BOUND;
+    max = 0;
+    med = 0;
+
+
+    dni::reset_c();    
+    for (int i = n; i < bench_size; i++)
+    {
+        experiment_1.search(keys[i]);
+        if (dni::nth_compare() > max)
+            max = dni::nth_compare();
+        if (dni::nth_compare() < min)
+            min = dni::nth_compare();
+        med += dni::nth_compare();
+    }
+    med = med/n;
     std::cout << "\n\tInsercion:\t" << min << "\t" <<med<< "\t" << max;
 
     return 0; 
